@@ -12,10 +12,7 @@ const dataRepository = {
 
   add (filename, key, obj) {
     let file = this.loadFile(filename)
-    let data = file[key] || []
-
-    data.push(obj)
-    file[key] = data
+    file[key] = obj
 
     const path = this.getPath(filename)
     this.writeFile(path, file)

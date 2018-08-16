@@ -1,0 +1,10 @@
+<h1>Ste.com</h1>
+
+<h2>Recent Posts</h2>
+{{#each posts}}
+  <div>
+    <h3>{{ this.title }}</h3>
+    <img height="50" src="{{ this.imgUrl }}">
+    <p>{{ this.body }}</p>
+  </div>
+{{/each}}
