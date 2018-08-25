@@ -1,20 +1,19 @@
 const express = require('express')
 const router = express.Router()
-const dataRepository = require('../src/dataRepository')
+const postRepository = require('../src/postRepository')
 
 /* GET home page. */
 router.get('/', (req, res) => {
-  const posts = dataRepository.loadFile('posts')
-  
-  res.render('pages/index', { title: ':home', posts })
+  const posts = postRepository.getRecent(req.query.posts)
+  res.render('pages/index', { title: '| home', posts })
 })
 
 router.get('/new', (req, res) => {
-  res.render('pages/new', { title: ':new post' })
+  res.render('pages/new', { title: '| new post' })
 })
 
 router.post('/new', (req, res) => {
-  dataRepository.add('posts', Date.now(), req.body)
+  postRepository.save(req.body)
   res.sendStatus(202)
 })
 
