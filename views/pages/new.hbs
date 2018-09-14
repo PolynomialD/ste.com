@@ -8,8 +8,21 @@
     <label for="formGroupImage">Image URL</label>
     <input name="imgUrl" type="text" class="form-control" id="formGroupImage">
   </div>
-  <div class="form-group">
-    <textarea name="body" class="form-control" rows="25"></textarea>
+  <input id="body-input" name="body"type="hidden"></input>
+  <div id="editor">
+    <p>Hello World!</p>
+    <p>Some initial <strong>bold</strong> text</p>
+    <p><br></p>
   </div>
   <button type="submit" class="btn btn-dark">Submit</button>
 </form>
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+  var quill = new Quill('#editor', {
+    theme: 'snow'
+  });
+  quill.on('text-change', function(delta, oldDelta, source) {
+    $('#body-input').val(JSON.stringify(quill.getContents()))
+  });
+</script>

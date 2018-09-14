@@ -3,10 +3,12 @@
 <h2>Recent Posts</h2>
 <a href="/?posts=5">5</a>
 {{#each posts}}
-  <div>
-    <h3>{{ this.title }}</h3>
-    <h6>{{ this.dateString }}</h6>
-    <img height="50" src="{{ this.imgUrl }}">
-    <p>{{ this.body }}</p>
-  </div>
+  <a href="/view/{{ @key }}">
+    <div>
+      <h3>{{ this.title }}</h3>
+      <h6>{{ this.dateString }}</h6>
+      <img height="50" src="{{ this.imgUrl }}">
+      <p>{{ this.body }}</p>
+    </div>
+  </a>
 {{/each}}

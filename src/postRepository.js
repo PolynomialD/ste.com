@@ -10,11 +10,20 @@ const postRepository = {
     return recentPosts
   },
 
-  save (obj) {
+  create (obj) {
     const timestamp = Date.now()
+    const key = obj.title.toLowerCase().replace(/ /g, '-')
+    obj.created = timestamp
     obj.dateString = new Date(timestamp).toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
-    dataRepository.add('posts', timestamp, obj)
+    dataRepository.add('posts', key, obj)
+  },
+
+  get (postKey) {
+    const posts = dataRepository.loadFile('posts')
+    const post = posts[postKey]
+    return post
   }
+
 }
 
 module.exports = postRepository

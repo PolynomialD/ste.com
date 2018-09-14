@@ -13,8 +13,22 @@ router.get('/new', (req, res) => {
 })
 
 router.post('/new', (req, res) => {
-  postRepository.save(req.body)
-  res.sendStatus(202)
+  postRepository.create(req.body)
+  res.send(202)
+  res.render('pages/new', { title: '| new post' })
+})
+
+router.get('/view/:postKey', (req, res) => {
+  const key = req.params.postKey
+  const post = postRepository.get(key)
+
+  if(post === undefined) {
+    res.status(404)
+    res.render('error')
+  } else {
+    console.log(post)
+    res.render('pages/view', { title: `| ${post.title}`, post })
+  }
 })
 
 module.exports = router
